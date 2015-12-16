@@ -125,6 +125,9 @@ class OffsetManager(val config: OffsetManagerConfig,
       val offsetsPartition = partitionFor(groupTopicAndPartition.group)
       trace("Removing stale offset and metadata for %s: %s".format(groupTopicAndPartition, offsetAndMetadata))
 
+      // h12: print offset timestamp
+      debug("offset timpstamp: %d, start: %d".format(offsetAndMetadata.timestamp, SystemTime.milliseconds))
+
       offsetsCache.remove(groupTopicAndPartition)
 
       val commitKey = OffsetManager.offsetCommitKey(groupTopicAndPartition.group,
